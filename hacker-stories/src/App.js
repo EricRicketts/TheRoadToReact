@@ -1,14 +1,17 @@
 import * as React from 'react';
 
 function App() {
-    const welcome = {
-        greeting: "Hey",
-        title: "React"
+    function getWelcome() {
+        return {
+            greeting: "Hey Ho",
+            title: "React"
+        }
     }
+
   return (
       <div>
         <h1>
-            {welcome.greeting} {welcome.title}
+            {getWelcome().greeting} {getWelcome().title}
         </h1>
 
         <label htmlFor="search">Search: </label>
