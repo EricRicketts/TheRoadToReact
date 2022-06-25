@@ -1,18 +1,11 @@
 import * as React from 'react';
-import {useLayoutEffect} from "react";
 
 function App() {
-    const min = 1, max = 100;
     function getWelcome() {
         return {
             greeting: "Hey Ho",
             title: "React"
         }
-    }
-    function generateKey(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random()*(max - min) + min);
     }
     const list = [
         {
@@ -33,24 +26,43 @@ function App() {
         },
     ];
 
+    function Search() {
+        return (
+            <div>
+                <label htmlFor="search">Search: </label>
+                <input id="search" type="text"/>
+            </div>
+        );
+    }
+    function List() {
+        return (
+            <ul>
+                {list.map(function(item) {
+                    return (
+                        <li key={item.objectID}>
+                        <span>
+                            <a href={item.url}>{item.title}</a>
+                        </span>
+                            <span> {item.author}</span>
+                            <span> {item.num_comments}</span>
+                            <span> {item.points}</span>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    }
   return (
       <div>
         <h1>
             {getWelcome().greeting} {getWelcome().title}
         </h1>
-          {
-            list.map(listItem => {
-                return <ul key={listItem.objectID}>
-                    <li key={generateKey(min, max)}>{listItem.title}</li>
-                    <li key={generateKey(min, max)}>{listItem.url}</li>
-                    <li key={generateKey(min, max)}>{listItem.author}</li>
-                    <li key={generateKey(min, max)}>{listItem.num_comments}</li>
-                    <li key={generateKey(min, max)}>{listItem.points}</li>
-                </ul>
-            })
-          }
-          <label htmlFor="search">Search: </label>
-        <input id="search" type="text"/>
+
+        <Search />
+
+        <hr/>
+
+        <List />
       </div>
   );
 }
