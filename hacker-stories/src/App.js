@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from "react";
 
 const getWelcome = () => ({ greeting: "Hey Ho", title: "React" });
 
@@ -22,14 +23,15 @@ const stories = [
 ];
 
 const Search = () => {
+    const [searchTerm, setSearchTerm] = useState('');
     const handleChange = (event) => {
-        console.log(event);
-        console.log(event.target.value);
+        setSearchTerm(event.target.value);
     }
     return (
         <div>
             <label htmlFor="search">Search: </label>
             <input id="search" type="text" onChange={handleChange}/>
+            <p>Searching for: {searchTerm}</p>
         </div>
     );
 };
