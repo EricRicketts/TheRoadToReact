@@ -26,7 +26,11 @@ const Search = (props) => {
     return (
         <div>
             <label htmlFor="search">Search: </label>
-            <input id="search" type="text" onChange={props.onSearch}/>
+            <input id="search"
+                   type="text"
+                   value={props.search}
+                   onChange={props.onSearch}
+            />
         </div>
     );
 };
@@ -54,7 +58,7 @@ const Item = (props) => {
     );
 }
 const App = () => {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('React');
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
     }
@@ -64,7 +68,7 @@ const App = () => {
     return (
         <div>
             <h1>{getWelcome().greeting} {getWelcome().title}</h1>
-            <Search onSearch={handleSearch} />
+            <Search serach={searchTerm} onSearch={handleSearch} />
             <hr/>
             <List list={searchedStories} />
         </div>
