@@ -33,19 +33,6 @@ const InputWithLabel = ({id, label, value, type = 'text', onInputChange}) => (
    </>
 );
 
-/*
-const Search = ({search, onSearch}) => (
-    <>
-        <label htmlFor="search">Search: </label>
-        <input id="search"
-               type="text"
-               value={search}
-               onChange={onSearch}
-        />
-    </>
-);
- */
-
 const List = ({list}) => (
     <ul>
         {list.map((item) => (
