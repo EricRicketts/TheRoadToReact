@@ -21,6 +21,19 @@ const stories = [
     },
 ];
 // below <>, </> pair are react fragments, we could have used <React.Fragment> & </React.Fragment>
+const InputWithLabel = ({id, label, value, type = 'text', onInputChange}) => (
+   <>
+       <label htmlFor={id}>{label}</label>
+       <input
+           id={id}
+           type={type}
+           value={value}
+           onChange={onInputChange}
+       />
+   </>
+);
+
+/*
 const Search = ({search, onSearch}) => (
     <>
         <label htmlFor="search">Search: </label>
@@ -31,6 +44,7 @@ const Search = ({search, onSearch}) => (
         />
     </>
 );
+ */
 
 const List = ({list}) => (
     <ul>
@@ -76,7 +90,12 @@ const App = () => {
     return (
         <div>
             <h1>{getWelcome().greeting} {getWelcome().title}</h1>
-            <Search serach={searchTerm} onSearch={handleSearch} />
+            <InputWithLabel
+                id="search"
+                label="Search"
+                value={searchTerm}
+                onInputChange={handleSearch}
+            />
             <hr/>
             <List list={searchedStories} />
         </div>
