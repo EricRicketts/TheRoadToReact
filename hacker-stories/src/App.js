@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {useEffect, useState} from "react";
 
 const getWelcome = () => ({ greeting: "Hey Ho", title: "React" });
 
@@ -52,16 +51,28 @@ const Item = ({item}) => (
     </li>
 );
 const App = () => {
-    const [searchTerm, setSearchTerm] = useState(localStorage.getItem('search') || 'React');
+    const useStorageState = (key, initialState) => {
+        const [value, setValue] = React.useState(
+            localStorage.getItem(key) || initialState
+        );
+
+        React.useEffect(() => {
+            localStorage.setItem(key, value)
+        }, [key, value]);
+
+        return [value, setValue];
+    };
+
+    const [searchTerm, setSearchTerm] = useStorageState('search', 'React');
+
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
     }
-    useEffect(() => {
-        localStorage.setItem('search', searchTerm);
-    }, [searchTerm]);
+
     const searchedStories = stories.filter((story) =>
         story.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
     return (
         <div>
             <h1>{getWelcome().greeting} {getWelcome().title}</h1>
